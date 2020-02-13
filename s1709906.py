@@ -169,6 +169,7 @@ class HMM:
 
     # Initialise data structures for tagging a new sentence.
     # Describe the data structures with comments.
+    # TODO: CHANGE THE COMMENTS!
     # Use the models stored in the variables: self.emission_PD and self.transition_PD
     # Input: first word in the sentence to tag
     def initialise(self, observation):
@@ -178,14 +179,39 @@ class HMM:
         :param observation: the first word in the sentence to tag
         :type observation: str
         """
-        raise NotImplementedError('HMM.initialise')
+        # raise NotImplementedError('HMM.initialise')
         # Initialise step 0 of viterbi, including
         #  transition from <s> to observation
         # use costs (-log-base-2 probabilities)
         # TODO
 
+        # The Viterbi data structure contains the Viterbi path probabilities as a T by N
+        # table where T is the number of observations and N is the number of states or tags.
+        # Each cell contains the most probable path by taking the maximum over all possible
+        # previous state sequences to arrive at that state.
+        self.viterbi = []
+        self.viterbi.append([])
+
         # Initialise step 0 of backpointer
         # TODO
+
+        # The backpointer data structure keeps track of the best path of hidden states that
+        # led to each state in a T by N table where T is the number of observations and N is
+        # the number of states. Each cell contains the state which had the maximum viterbi
+        # probability (from the Viterbi table) in the pervious time step (or observation).
+        self.backpointer = []
+        self.backpointer.append([])
+
+        # At intialise, cost with +logprob or *prob
+        for state in self.states:
+            # Probability of transition from state '<s>' to state 'state'
+            transition = self.transition_PD["<s>"].logprob(state)
+
+            # Probability of observation 'observation' given the current state 'state'
+            emission = self.emission_PD[state].logprob(observation)
+
+            self.viterbi[0][state] = transition + emission
+            self.backpointer[state] = [state]
 
     # Tag a new sentence using the trained model and already initialised data structures.
     # Use the models stored in the variables: self.emission_PD and self.transition_PD.
