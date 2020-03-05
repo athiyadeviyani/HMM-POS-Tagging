@@ -1,4 +1,5 @@
 import inspect, sys, hashlib
+import nltk, inspect, math, numpy as np
 
 # Hack around a warning message deep inside scikit learn, loaded by nltk :-(
 #  Modelled on https://stackoverflow.com/a/25067818
@@ -183,7 +184,6 @@ class HMM:
         # Initialise step 0 of viterbi, including
         #  transition from <s> to observation
         # use costs (-log-base-2 probabilities)
-        # TODO
 
         # The Viterbi data structure contains the Viterbi path probabilities as a T by N
         # table where T is the number of observations and N is the number of states or tags.
@@ -193,7 +193,6 @@ class HMM:
         self.viterbi.append([])
 
         # Initialise step 0 of backpointer
-        # TODO
 
         # The backpointer data structure keeps track of the best path of hidden states that
         # led to each state in a T by N table where T is the number of observations and N is
@@ -225,22 +224,78 @@ class HMM:
         :type observations: list(str)
         :return: List of tags corresponding to each word of the input
         """
-        raise NotImplementedError('HMM.tag')
+        # raise NotImplementedError('HMM.tag')
         tags = []
 
-        for t in ...: # fixme to iterate over steps
-            for s in ...: # fixme to iterate over states
-                pass # fixme to update the viterbi and backpointer data structures
-                #  Use costs, not probabilities
+        for t in range(1, len(observations)): # iterate over steps
+            for s in range(len(self.states)): # iterate over states
 
-        # TODO
+                # list of probabilities and pointers to previous states
+                # and take the most probable
+                state_probabilities = []
+
+                # go through all previous probabilities
+                #   calculate the probability of being in that state
+                #   probability = max of previous viterbi probabilities * 
+                #       probability to transition from that previous state to current state
+                for prevs in range(len(self.states)):
+
+                    # previous prob is viterbu probability for the previous observation (t-1)
+                    previous_prob = self.viterbi[prevs][t-1] # prev_prob is already neg log
+
+                    # emission prob is probability of observation i given current state i
+                    emission_prob = log(self.emission_PD[self.states[s]].prob(observations[t]), 2)
+
+                    # transition prob is probability of transition from state prevs to state i
+                    transition_prob = log(self.transition_PD[self.states[prevs]].prob(self.states[s]),2)
+
+                    # current probability is the sum of all three above, negative log probabilities are
+                    # used so we sum up instead of multiplying
+                    probability     = previous_prob - emission_prob - transition_prob
+                    state_probs     = state_probs + [probability]
+
+
+                # add the max prob of calculated probabilities to the corresponding path in viterbi list
+                self.viterbi[s].append(min(state_probs))
+
+                # add the backpointer to the state which produced the
+                # max prob of calculated probabilities
+                self.backpointer[s].append(np.argmin(state_probs))
+
+
+        
         # Add a termination step with cost based solely on cost of transition to </s> , end of sentence.
+        end_probs = []
 
-        # TODO
+        # Similar to above, go through all states and add the probability for them to finish, that is, 
+        # to transit from the state to end state </s>
+        for i in range(len(self.states)):
+            previous_prob = self.viterbi[i][len(observations) - 1]
+            prob_of_end = log(self.transition_model[self.states[i]].prob("</s>"),2)
+            total_prob = previous_prob - prob_of_end # negative log probability
+            end_probs = end_probs + [total_prob]
+
         # Reconstruct the tag sequence using the backpointer list.
         # Return the tag sequence corresponding to the best path as a list.
         # The order should match that of the words in the sentence.
-        tags = ... # fixme
+
+        # The first backpointer points to the state which had the largest probability
+        # at the end (previous viterbi probability + probability to finish)
+        last_bp = np.argmin(end_probs)
+
+        # Append the last state to the tags list
+        tags.append(self.states[last_bp])
+
+        # Go through the observation indexes from end to start
+        # Add the backpointed state to the tags list
+        # Update the backpointer to the one which came from the previously backpointed state
+        for i in range(len(observations)-1, 0, -1):
+            bp = self.backpointer[last_bp][i]
+            tags.append(self.states[bp])
+            last_bp = bp
+
+        # Reverse tags to match the order of observations
+        tags.reverse()
 
         return tags
 
