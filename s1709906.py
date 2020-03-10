@@ -74,7 +74,8 @@ class HMM:
 
         # Compute the emission model
         emission_FD = ConditionalFreqDist(data)
-        self.emission_PD = ConditionalProbDist(emission_FD, LidstoneProbDist, 0.01)
+        lidstone_estimator = lambda fd: LidstoneProbDist(fd, 0.01, fd.B() + 1)
+        self.emission_PD = ConditionalProbDist(emission_FD, lidstone_estimator)
         
         for tag, word in data:
             if tag not in self.states:
@@ -98,10 +99,9 @@ class HMM:
         if self.emission_PD == None:
             self.emission_model(self.train_data)
 
-        # raise NotImplementedError('HMM.elprob')
 
-        # Calculate the log probability of a word with given tag/state, base 2
-        return self.emission_PD[state].logprob(word) # -1.4
+        # Calculate the log probability of a word with given state
+        return self.emission_PD[state].logprob(word) 
 
     # Compute transition model using ConditionalProbDist with a LidstonelprobDist estimator.
     # See comments for emission_model above for details on the estimator.
@@ -124,7 +124,7 @@ class HMM:
         for s in train_data:
             start = ["<s>"]
             start.extend([tag for (word, tag) in s])
-            start.extend(["</s"])
+            start.extend(["</s>"])
             tags.extend(start)
 
         for i in range(len(tags) - 1):
@@ -179,7 +179,7 @@ class HMM:
         #  transition from <s> to observation
         # use costs (-log-base-2 probabilities)
         
-        # The Viterbi data structure is a T by N table
+        # The Viterbi data structure is a N by T table
         #   where T = number of observations
         #         N = number of states/tags
         # Each cell of the table contains the most probable path 
@@ -192,7 +192,7 @@ class HMM:
         #   the highest viterbi probability (from the viterbi table)
         # This will used to backtrack from the last state to determine the final maximum path back 
         #   to the starting point
-        # The backpointer data structure is a T by N table
+        # The backpointer data structure is a N by T table
         #   where T = number of observations
         #         N = number of states
         # Each cell of the table contains the state that has the maximum viterbi probability
@@ -281,7 +281,7 @@ class HMM:
         #   Add the transition probability from that state to the end state </s>
         for s in range(len(self.states)):
             prev_prob = self.viterbi[s][len(observations) - 1]
-            transition_prob = -self.transition_PD[self.states[s]].logprob('</s>')
+            transition_prob = -self.tlprob(self.states[s], ('</s>'))
             current_prob = prev_prob + transition_prob
             termination_probs += [current_prob]
 
@@ -330,7 +330,7 @@ class HMM:
         # Viterbi data structure is T x N table
         #   where T is the number of observations (steps)
         #         N is the number of states
-        return self.viterbi[step][self.states.index(state)]
+        return self.viterbi[self.states.index(state)][step]
 
 
     # Access function for testing the backpointer data structure
@@ -348,11 +348,11 @@ class HMM:
         :return: The state name to go back to at step-1
         :rtype: str
         """
-        if step == 0 or step == -len(self.viterbi):
+        if step == 0 or step == -len(self.viterbi): # first step
             return '<s>'
-        if state == '</s>' and (step == len(self.viterbi) - 1 or step == -1):
-            return self.states[self.backpointer[step][0]]
-        return self.states[self.backpointer[step][self.states.index(state)]]
+        if state == '</s>' and (step == len(self.viterbi) - 1 or step == -1): # last step
+            return self.states[self.backpointer[0][steps]]
+        return self.states[self.backpointer[self.states.index(state)][step]]
 
 def answer_question4b():
     """
@@ -361,14 +361,12 @@ def answer_question4b():
     :rtype: list(tuple(str,str)), list(tuple(str,str)), str
     :return: your answer [max 280 chars]
     """
-    raise NotImplementedError('answer_question4b')
-
 
     # One sentence, i.e. a list of word/tag pairs, in two versions
     #  1) As tagged by your HMM
     #  2) With wrong tags corrected by hand
-    tagged_sequence = 'fixme'
-    correct_sequence = 'fixme'
+    tagged_sequence = [('``', '.'), ('My', 'DET'), ('taste', 'NOUN'), ('is', 'VERB'), ('gaudy', 'ADV'), ('.', '.')]
+    correct_sequence = [('``', '.'), ('My', 'DET'), ('taste', 'NOUN'), ('is', 'VERB'), ('gaudy', 'ADJ'), ('.', '.')]
     # Why do you think the tagger tagged this example incorrectly?
     answer =  inspect.cleandoc("""\
     fill me in""")[0:280]
@@ -386,7 +384,7 @@ def answer_question5():
     :rtype: str
     :return: your answer [max 500 chars]
     """
-    raise NotImplementedError('answer_question5')
+    #raise NotImplementedError('answer_question5')
 
     return inspect.cleandoc("""\
     fill me in""")[0:500]
@@ -400,7 +398,7 @@ def answer_question6():
     :rtype: str
     :return: your answer [max 500 chars]
     """
-    raise NotImplementedError('answer_question6')
+    #raise NotImplementedError('answer_question6')
 
     return inspect.cleandoc("""\
     fill me in""")[0:500]
@@ -422,6 +420,7 @@ def answers():
     # Divide corpus into train and test data.
     # Test set = last 500 sentences
     # Train set = first (len(tagged_sentences_universal) - test_size) sentences
+    # This split corresponds roughly to a 90/10 division
     test_size  = 500
     train_size = len(tagged_sentences_universal) - test_size
     test_data_universal = tagged_sentences_universal[-test_size:]
@@ -463,6 +462,8 @@ def answers():
     ttags = model.tag(s)
     print("Tagged a trial sentence:\n  %s"%list(zip(s,ttags)))
 
+    
+
 
     v_sample=model.get_viterbi_value('VERB',5)
     if not (type(v_sample)==float and 0.0<=v_sample):
@@ -471,6 +472,9 @@ def answers():
     b_sample=model.get_backpointer_value('VERB',5)
     if not (type(b_sample)==str and b_sample in model.states):
            print('backpointer value (%s) must be a state name'%b_sample,file=sys.stderr)
+
+    print("VITERBI VALUE")
+    print(model.get_viterbi_value('VERB',2))
 
 
     # check the model's accuracy (% correct) using the test set
