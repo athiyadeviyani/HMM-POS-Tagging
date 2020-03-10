@@ -95,7 +95,13 @@ class HMM:
         :return: log base 2 of the estimated emission probability
         :rtype: float
         """
-        return log(self.emission_PD['VERB'].prob('is')) # -1.4
+        if self.emission_PD == None:
+            self.emission_model(self.train_data)
+
+        # raise NotImplementedError('HMM.elprob')
+
+        # Calculate the log probability of a word with given tag/state, base 2
+        return self.emission_PD[state].logprob(word) # -1.4
 
     # Compute transition model using ConditionalProbDist with a LidstonelprobDist estimator.
     # See comments for emission_model above for details on the estimator.
@@ -144,10 +150,12 @@ class HMM:
         :return: log base 2 of the estimated transition probability
         :rtype: float
         """
-        transition_PD = self.transition_model(self.train_data)
-        return -transition_PD[state1].logprob(state2) # negative log probability
+        if self.transition_PD == None:
+            self.transition_model(self.train_data)
 
-    # Train the HMM
+        return self.transition_PD[state1].logprob(state2) 
+
+# Train the HMM
     def train(self):
         """
         Trains the HMM from the training data
@@ -164,7 +172,6 @@ class HMM:
     def initialise(self, observation):
         """
         Initialise data structures for tagging a new sentence.
-
         :param observation: the first word in the sentence to tag
         :type observation: str
         """
@@ -177,8 +184,7 @@ class HMM:
         #         N = number of states/tags
         # Each cell of the table contains the most probable path 
         # i.e. the maximum of all possible previous state sequences to arrive at that state
-        # self.viterbi = [] is already defined in __init__()
-        self.viterbi.append([])
+        self.viterbi = []
 
         # Initialise step 0 of backpointer
 
@@ -191,8 +197,7 @@ class HMM:
         #         N = number of states
         # Each cell of the table contains the state that has the maximum viterbi probability
         # in the previous observation
-        # self.backpointer = [] is already defined in __init__()
-        self.backpointer.append([])
+        self.backpointer = []
 
         # Go through the states
         # Calculate the probability of being at that state
@@ -202,10 +207,12 @@ class HMM:
         for state in self.states:
             
             # Transition probability is the probability to transition from state '<s>' to state 'state'
-            transition_prob = -self.transition_PD['<s>'].logprob(state)
+            transition_prob = -self.tlprob('<s>',state)
+            # transition_prob = -self.transition_PD['<s>'].logprob(state)
 
             # Emission probability is the probability of observation 'observation' to current state 'state'
-            emission_prob = -self.emission_PD[state].logprob(observation)
+            emission_prob = -self.elprob(state, observation)
+            # emission_prob = -self.emission_PD[state].logprob(observation)
 
             # Current probability = prev + transition_prob + emission_prob
             #       in this case, prev = 0
@@ -222,7 +229,6 @@ class HMM:
     def tag(self, observations):
         """
         Tag a new sentence using the trained model and already initialised data structures.
-
         :param observations: List of words (a sentence) to be tagged
         :type observations: list(str)
         :return: List of tags corresponding to each word of the input
@@ -245,10 +251,12 @@ class HMM:
                     previous_prob = self.viterbi[prev_state][t-1]
 
                     # Transition probability is the probability of transitioning from state prev_state to state s
-                    transition_prob = -self.transition_PD[self.states[prev_state]].logprob(self.states[s])
+                    transition_prob = -self.tlprob(self.states[prev_state], self.states[s])
+                    #transition_prob = -self.transition_PD[self.states[prev_state]].logprob(self.states[s])
 
                     # Emission probability is the probability of observation t given current state s
-                    emission_prob = -self.emission_PD[self.states[s]].logprob(observations[t])
+                    emission_prob = -self.elprob(self.states[s], observations[t])
+                    # emission_prob = -self.emission_PD[self.states[s]].logprob(observations[t])
 
                     # Current probability = previous_prob + emission_prob + transition_prob
                     #   We are summing them up because we have used the negative log probabilities
@@ -319,7 +327,11 @@ class HMM:
         :return: The value (a cost) for state as of step
         :rtype: float
         """
-        return self.viterbi[state][step]
+        # Viterbi data structure is T x N table
+        #   where T is the number of observations (steps)
+        #         N is the number of states
+        return self.viterbi[step][self.states.index(state)]
+
 
     # Access function for testing the backpointer data structure
     # For example model.get_backpointer_value('VERB',2) might be 'NOUN'
@@ -336,7 +348,11 @@ class HMM:
         :return: The state name to go back to at step-1
         :rtype: str
         """
-        return self.backpointer[state][step]
+        if step == 0 or step == -len(self.viterbi):
+            return '<s>'
+        if state == '</s>' and (step == len(self.viterbi) - 1 or step == -1):
+            return self.states[self.backpointer[step][0]]
+        return self.states[self.backpointer[step][self.states.index(state)]]
 
 def answer_question4b():
     """
@@ -403,11 +419,12 @@ def answers():
     tagged_sentences_universal = brown.tagged_sents(categories='news', tagset='universal')
 
     # Divide corpus into train and test data.
-    test_size = 500
-    train_size = 0 # fixme
-
-    test_data_universal = tagged_sentences_universal[1:2] # fixme
-    train_data_universal = tagged_sentences_universal[3:4] # fixme
+    # Test set = last 500 sentences
+    # Train set = first (len(tagged_sentences_universal) - test_size) sentences
+    test_size  = 500
+    train_size = len(tagged_sentences_universal) - test_size
+    test_data_universal = tagged_sentences_universal[train_size:]
+    train_data_universal = tagged_sentences_universal[:train_size]
 
     if hashlib.md5(''.join(map(lambda x:x[0],train_data_universal[0]+train_data_universal[-1]+test_data_universal[0]+test_data_universal[-1])).encode('utf-8')).hexdigest()!='164179b8e679e96b2d7ff7d360b75735':
         print('!!!test/train split (%s/%s) incorrect, most of your answers will be wrong hereafter!!!'%(len(train_data_universal),len(test_data_universal)),file=sys.stderr)
@@ -441,7 +458,7 @@ def answers():
     ######
     s='the cat in the hat came back'.split()
     model.initialise(s[0])
-    ttags = [] # fixme
+    ttags = model.tag(s)
     print("Tagged a trial sentence:\n  %s"%list(zip(s,ttags)))
 
     v_sample=model.get_viterbi_value('VERB',5)
@@ -464,11 +481,11 @@ def answers():
 
         for ((word,gold),tag) in zip(sentence,tags):
             if tag == gold:
-                pass # fix me
+                correct += 1
             else:
-                pass # fix me
+                incorrect += 1
 
-    accuracy = 0.0 # fix me
+    accuracy = correct / (correct + incorrect)
     print('Tagging accuracy for test set of %s sentences: %.4f'%(test_size,accuracy))
 
     # Print answers for 4b, 5 and 6
