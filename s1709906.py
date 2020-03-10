@@ -363,6 +363,7 @@ def answer_question4b():
     """
     raise NotImplementedError('answer_question4b')
 
+
     # One sentence, i.e. a list of word/tag pairs, in two versions
     #  1) As tagged by your HMM
     #  2) With wrong tags corrected by hand
@@ -423,7 +424,7 @@ def answers():
     # Train set = first (len(tagged_sentences_universal) - test_size) sentences
     test_size  = 500
     train_size = len(tagged_sentences_universal) - test_size
-    test_data_universal = tagged_sentences_universal[train_size:]
+    test_data_universal = tagged_sentences_universal[-test_size:]
     train_data_universal = tagged_sentences_universal[:train_size]
 
     if hashlib.md5(''.join(map(lambda x:x[0],train_data_universal[0]+train_data_universal[-1]+test_data_universal[0]+test_data_universal[-1])).encode('utf-8')).hexdigest()!='164179b8e679e96b2d7ff7d360b75735':
@@ -457,9 +458,11 @@ def answers():
     #  until you've filled in the tag method
     ######
     s='the cat in the hat came back'.split()
+    # s = 'my friend is lonely'.split()
     model.initialise(s[0])
     ttags = model.tag(s)
     print("Tagged a trial sentence:\n  %s"%list(zip(s,ttags)))
+
 
     v_sample=model.get_viterbi_value('VERB',5)
     if not (type(v_sample)==float and 0.0<=v_sample):
@@ -474,16 +477,36 @@ def answers():
     correct = 0
     incorrect = 0
 
+    incorrect_sentences = []
+    i_s = []
+
     for sentence in test_data_universal:
         s = [word.lower() for (word, tag) in sentence]
         model.initialise(s[0])
         tags = model.tag(s)
 
+        incorrect_bool = False
+
         for ((word,gold),tag) in zip(sentence,tags):
             if tag == gold:
                 correct += 1
             else:
+                incorrect_bool = incorrect_bool or True
                 incorrect += 1
+                
+        if incorrect_bool:
+            i_s.append(zip(sentence,tags))
+            incorrect_sentences.append(zip(sentence,tags))
+    
+    for i in range(10):
+        print("================= SENTENCE NUMBER: " + str(i + 1))
+        print(list(i_s[i]))
+        # print(' '.join([a for a, b in i_s[i]]))
+        for ((word,gold),tag) in incorrect_sentences[i]:
+            if tag != gold:
+                print("Mistakenly tagged word: " + word)
+                print("-- Expected tag: " + gold)
+                print("-- Actual tag: " + tag)
 
     accuracy = correct / (correct + incorrect)
     print('Tagging accuracy for test set of %s sentences: %.4f'%(test_size,accuracy))
