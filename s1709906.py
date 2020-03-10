@@ -348,9 +348,11 @@ class HMM:
         :return: The state name to go back to at step-1
         :rtype: str
         """
-        if step == 0 or step == -len(self.viterbi): # first step
+        # First
+        if step == 0 or step == -len(self.viterbi): 
             return '<s>'
-        if state == '</s>' and (step == len(self.viterbi) - 1 or step == -1): # last step
+        # Last
+        if state == '</s>' and (step == len(self.viterbi) - 1 or step == -1): 
             return self.states[self.backpointer[0][steps]]
         return self.states[self.backpointer[self.states.index(state)][step]]
 
@@ -369,7 +371,11 @@ def answer_question4b():
     correct_sequence = [('``', '.'), ('My', 'DET'), ('taste', 'NOUN'), ('is', 'VERB'), ('gaudy', 'ADJ'), ('.', '.')]
     # Why do you think the tagger tagged this example incorrectly?
     answer =  inspect.cleandoc("""\
-    fill me in""")[0:280]
+    - HMM model can only see 2-word histories, no long-term dependencies
+    - 'gaudy' refers to the word 'taste'
+    - HMM can only see that 'gaudy' appears after a VERB
+    - Thus model tags it as an ADV rather than an ADJ
+    - The cost of gaudy being an 'ADV' and an 'ADJ' is similar""")[0:280]
 
     return tagged_sequence, correct_sequence, answer
 
@@ -401,7 +407,10 @@ def answer_question6():
     #raise NotImplementedError('answer_question6')
 
     return inspect.cleandoc("""\
-    fill me in""")[0:500]
+    - The same word will have a lot of different tags
+    - Each (word, tag) pair will have less observations
+    - Lower confidence level on the probability model
+    - Accuracy on tag set will be much lower""")[0:500]
 
 # Useful for testing
 def isclose(a, b, rel_tol=1e-09, abs_tol=0.0):
