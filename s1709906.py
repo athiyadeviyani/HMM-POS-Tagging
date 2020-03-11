@@ -96,11 +96,11 @@ class HMM:
         :return: log base 2 of the estimated emission probability
         :rtype: float
         """
+        # IF block to catch if the model is not trained yet
         if self.emission_PD == None:
             self.emission_model(self.train_data)
 
-
-        # Calculate the log probability of a word with given state
+        # Estimated log base 2 emission probability of emitting a word 'word' from a state 'state'
         return self.emission_PD[state].logprob(word) 
 
     # Compute transition model using ConditionalProbDist with a LidstonelprobDist estimator.
@@ -150,9 +150,11 @@ class HMM:
         :return: log base 2 of the estimated transition probability
         :rtype: float
         """
+        # IF block to catch if the model is not trained yet
         if self.transition_PD == None:
             self.transition_model(self.train_data)
 
+        # Estimated log base 2 transition probability from 'state1' to 'state2'
         return self.transition_PD[state1].logprob(state2) 
 
 # Train the HMM
@@ -219,7 +221,7 @@ class HMM:
             current_state_probability = transition_prob + emission_prob
             self.viterbi.append([current_state_probability])
             
-            # Backpointer initially points to the the start state <s> with index 0 (self.states[0])
+            # Backpointer initially points to the the start state
             self.backpointer.append([0])
 
     # Tag a new sentence using the trained model and already initialised data structures.
@@ -261,7 +263,7 @@ class HMM:
                     # Current probability = previous_prob + emission_prob + transition_prob
                     #   We are summing them up because we have used the negative log probabilities
                     current_prob = previous_prob + emission_prob + transition_prob
-                    state_probs += [current_prob]
+                    state_probs.append(current_prob)
 
                 # Add the maximum probability of all calculated probabilities to the respective path
                 # for state s in the Viterbi table
@@ -283,7 +285,7 @@ class HMM:
             prev_prob = self.viterbi[s][len(observations) - 1]
             transition_prob = -self.tlprob(self.states[s], ('</s>'))
             current_prob = prev_prob + transition_prob
-            termination_probs += [current_prob]
+            termination_probs.append(current_prob)
 
         # Reconstruct the tag sequence using the backpointer list.
         # Return the tag sequence corresponding to the best path as a list.
@@ -348,10 +350,10 @@ class HMM:
         :return: The state name to go back to at step-1
         :rtype: str
         """
-        # First
+        # First + if negative then count backwards from the end
         if step == 0 or step == -len(self.viterbi): 
             return '<s>'
-        # Last
+        # Last + if negative then count backwards from the end
         if state == '</s>' and (step == len(self.viterbi) - 1 or step == -1): 
             return self.states[self.backpointer[0][steps]]
         return self.states[self.backpointer[self.states.index(state)][step]]
@@ -370,12 +372,13 @@ def answer_question4b():
     tagged_sequence = [('``', '.'), ('My', 'DET'), ('taste', 'NOUN'), ('is', 'VERB'), ('gaudy', 'ADV'), ('.', '.')]
     correct_sequence = [('``', '.'), ('My', 'DET'), ('taste', 'NOUN'), ('is', 'VERB'), ('gaudy', 'ADJ'), ('.', '.')]
     # Why do you think the tagger tagged this example incorrectly?
+    
+    # QUANTITATIVE ANALYSIS
+    # gaudy ADV -18.15 VERB ADV -3.81
+    # gaudy ADJ -19.18 VERB ADJ -4.35
+
     answer =  inspect.cleandoc("""\
-    - HMM model can only see 2-word histories, no long-term dependencies
-    - 'gaudy' refers to the word 'taste'
-    - HMM can only see that 'gaudy' appears after a VERB
-    - Thus model tags it as an ADV rather than an ADJ
-    - The cost of gaudy being an 'ADV' and an 'ADJ' is similar""")[0:280]
+    The HMM can only see 2-word histories, thus it can't see that the word 'gaudy' is an ADJ that describes the word 'taste' instead of an ADJ that follows the VERB 'is'. The model tagged 'gaudy' as an ADV because 'gaudy' has a higher probability as an ADV and a VERB has a higher probability to be followed by an ADV.""")[0:280]
 
     return tagged_sequence, correct_sequence, answer
 
@@ -404,13 +407,10 @@ def answer_question6():
     :rtype: str
     :return: your answer [max 500 chars]
     """
-    #raise NotImplementedError('answer_question6')
 
     return inspect.cleandoc("""\
-    - The same word will have a lot of different tags
-    - Each (word, tag) pair will have less observations
-    - Lower confidence level on the probability model
-    - Accuracy on tag set will be much lower""")[0:500]
+    We converted the original Brown Corpus tagset to the Universal tagset because the Universal tagset has fewer tags. Having more tags means we're likely to have sparser data, i.e. the same word will have more different tags, thus that each (word, tag) pair will have less observations. This may cause lower confidence level on the probability model and accuracy on tag set will be much lower. The Universal tagset is more language agnostic (more generic) and will work better on other languages.
+    """)[0:500]
 
 # Useful for testing
 def isclose(a, b, rel_tol=1e-09, abs_tol=0.0):
@@ -471,8 +471,8 @@ def answers():
     ttags = model.tag(s)
     print("Tagged a trial sentence:\n  %s"%list(zip(s,ttags)))
 
-    
-
+    print(model.elprob('NOUN', 'cat'))
+    print(model.tlprob('VERB', 'ADJ'))
 
     v_sample=model.get_viterbi_value('VERB',5)
     if not (type(v_sample)==float and 0.0<=v_sample):
@@ -482,8 +482,18 @@ def answers():
     if not (type(b_sample)==str and b_sample in model.states):
            print('backpointer value (%s) must be a state name'%b_sample,file=sys.stderr)
 
-    print("VITERBI VALUE")
-    print(model.get_viterbi_value('VERB',2))
+
+    ### QUESTION 4b analysis
+    # gaudy ADV -18.15 VERB ADV -3.81
+    # gaudy ADJ -19.18 VERB ADJ -4.35
+
+    print("COST OF GAUDY BEING ADV and ADJ")
+    print(model.elprob('ADV','gaudy')) # -18.15227989016495     
+    print(model.elprob('ADJ','gaudy')) # -19.178518971478535
+
+    print("COST OF VERB FOLLOWED BY ADV and ADJ")
+    print(model.tlprob('VERB','ADV')) # -3.812200102417784      HIGHER
+    print(model.tlprob('VERB','ADJ')) # -4.349747810988496
 
 
     # check the model's accuracy (% correct) using the test set
