@@ -378,7 +378,7 @@ def answer_question4b():
     # gaudy ADJ -19.18 VERB ADJ -4.35
 
     answer =  inspect.cleandoc("""\
-    The HMM can only see 2-word histories, thus it can't see that the word 'gaudy' is an ADJ that describes the word 'taste' instead of an ADJ that follows the VERB 'is'. The model tagged 'gaudy' as an ADV because 'gaudy' has a higher probability as an ADV and a VERB has a higher probability to be followed by an ADV.""")[0:280]
+    The HMM can only see 2-word histories, thus it can't see that the word 'gaudy' is actually an ADJ that describes the word 'taste'. The model tagged 'gaudy' as an ADV because 'gaudy' has a higher probability as an ADV and a VERB has a higher probability to be followed by an ADV.""")[0:280]
 
     return tagged_sequence, correct_sequence, answer
 
