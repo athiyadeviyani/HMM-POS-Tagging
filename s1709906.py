@@ -377,7 +377,7 @@ def answer_question4b():
     # gaudy ADV -18.15 VERB ADV -3.81
     # gaudy ADJ -19.18 VERB ADJ -4.35
 
-    answer =  inspect.cleandoc("""\
+    answer = inspect.cleandoc("""\
     The HMM can only see 2-word histories, thus it can't see that the word 'gaudy' is actually an ADJ that describes the word 'taste'. The model tagged 'gaudy' as an ADV because 'gaudy' has a higher probability as an ADV and a VERB has a higher probability to be followed by an ADV.""")[0:280]
 
     return tagged_sequence, correct_sequence, answer
@@ -394,9 +394,10 @@ def answer_question5():
     :return: your answer [max 500 chars]
     """
     #raise NotImplementedError('answer_question5')
+    
 
     return inspect.cleandoc("""\
-    fill me in""")[0:500]
+    To tag a sentence, we would need the transition and emission probabilities. For an unrecognised word, the emission probability will always be 0. However, if we make use of smoothing (e.g. by using the Lidstone estimator), it will address the problem by stealing probability mass from seen events and reallocating it to unseen events. Then, you will have a predicted tag assigned to the unrecognised word. The parsing algorithm should now be able to produce a parse for the well-formed sentence.""")[0:500]
 
 def answer_question6():
     """
@@ -444,6 +445,8 @@ def answers():
     # Train the HMM.
     model.train()
 
+    
+
     # Some preliminary sanity checks
     # Use these as a model for other checks
     e_sample=model.elprob('VERB','is')
@@ -466,13 +469,10 @@ def answers():
     #  until you've filled in the tag method
     ######
     s='the cat in the hat came back'.split()
-    # s = 'my friend is lonely'.split()
     model.initialise(s[0])
     ttags = model.tag(s)
-    print("Tagged a trial sentence:\n  %s"%list(zip(s,ttags)))
 
-    print(model.elprob('NOUN', 'cat'))
-    print(model.tlprob('VERB', 'ADJ'))
+    print("Tagged a trial sentence:\n  %s"%list(zip(s,ttags)))
 
     v_sample=model.get_viterbi_value('VERB',5)
     if not (type(v_sample)==float and 0.0<=v_sample):
@@ -483,17 +483,7 @@ def answers():
            print('backpointer value (%s) must be a state name'%b_sample,file=sys.stderr)
 
 
-    ### QUESTION 4b analysis
-    # gaudy ADV -18.15 VERB ADV -3.81
-    # gaudy ADJ -19.18 VERB ADJ -4.35
 
-    print("COST OF GAUDY BEING ADV and ADJ")
-    print(model.elprob('ADV','gaudy')) # -18.15227989016495     
-    print(model.elprob('ADJ','gaudy')) # -19.178518971478535
-
-    print("COST OF VERB FOLLOWED BY ADV and ADJ")
-    print(model.tlprob('VERB','ADV')) # -3.812200102417784      HIGHER
-    print(model.tlprob('VERB','ADJ')) # -4.349747810988496
 
 
     # check the model's accuracy (% correct) using the test set
@@ -531,6 +521,23 @@ def answers():
                 print("-- Expected tag: " + gold)
                 print("-- Actual tag: " + tag)
 
+
+    ### QUESTION 4b analysis
+    # gaudy ADV -18.15 VERB ADV -3.81
+    # gaudy ADJ -19.18 VERB ADJ -4.35
+
+    print("================= QUESTION 4B ANALYSIS =================")
+
+    print("COST OF GAUDY BEING ADV and ADJ")
+    print(model.elprob('ADV','gaudy')) # -18.15227989016495     HIGHER 
+    print(model.elprob('ADJ','gaudy')) # -19.178518971478535
+
+    print("COST OF VERB FOLLOWED BY ADV and ADJ")
+    print(model.tlprob('VERB','ADV')) # -3.812200102417784      HIGHER
+    print(model.tlprob('VERB','ADJ')) # -4.349747810988496
+
+    print("================= ACCURACY =================")
+    
     accuracy = correct / (correct + incorrect)
     print('Tagging accuracy for test set of %s sentences: %.4f'%(test_size,accuracy))
 

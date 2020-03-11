@@ -1,0 +1,402 @@
+states: ['DET', 'NOUN', 'ADJ', 'VERB', 'ADP', '.', 'ADV', 'CONJ', 'PRT', 'PRON', 'NUM', 'X']
+
+Tagged a trial sentence:
+  [('the', 'DET'), ('cat', 'NOUN'), ('in', 'ADP'), ('the', 'DET'), ('hat', 'NOUN'), ('came', 'VERB'), ('back', 'ADV')]
+================= SENTENCE NUMBER: 1
+[(('Tooling', 'VERB'), 'ADV'), (('through', 'ADP'), 'ADP'), (('Sydney', 'NOUN'), 'NOUN'), (('on', 'ADP'), 'ADP'), (('his', 'DET'), 'DET'), (('way', 'NOUN'), 'NOUN'), (('to', 'PRT'), 'ADP'), (('race', 'VERB'), 'NOUN'), (('in', 'ADP'), 'ADP'), (('the', 'DET'), 'DET'), (('New', 'ADJ'), 'ADJ'), (('Zealand', 'NOUN'), 'X'), (('Grand', 'X'), 'X'), (('Prix', 'X'), 'X'), ((',', '.'), '.'), (("Britain's", 'NOUN'), 'X'), (('balding', 'ADJ'), 'X'), (('Ace', 'NOUN'), 'X'), (('Driver', 'NOUN'), 'X'), (('Stirling', 'NOUN'), 'X'), (('Moss', 'NOUN'), 'X'), ((',', '.'), '.'), (('31', 'NUM'), 'NUM'), ((',', '.'), '.'), (('all', 'PRT'), 'PRT'), (('but', 'ADP'), 'CONJ'), (('smothered', 'VERB'), 'ADV'), (('himself', 'PRON'), 'PRON'), (('in', 'ADP'), 'ADP'), (('his', 'DET'), 'DET'), (('own', 'ADJ'), 'ADJ'), (('exhaust', 'NOUN'), 'NOUN'), (('of', 'ADP'), 'ADP'), (('self-crimination', 'NOUN'), 'NUM'), (('.', '.'), '.')]
+Mistakenly tagged word: Tooling
+-- Expected tag: VERB
+-- Actual tag: ADV
+Mistakenly tagged word: to
+-- Expected tag: PRT
+-- Actual tag: ADP
+Mistakenly tagged word: race
+-- Expected tag: VERB
+-- Actual tag: NOUN
+Mistakenly tagged word: Zealand
+-- Expected tag: NOUN
+-- Actual tag: X
+Mistakenly tagged word: Britain's
+-- Expected tag: NOUN
+-- Actual tag: X
+Mistakenly tagged word: balding
+-- Expected tag: ADJ
+-- Actual tag: X
+Mistakenly tagged word: Ace
+-- Expected tag: NOUN
+-- Actual tag: X
+Mistakenly tagged word: Driver
+-- Expected tag: NOUN
+-- Actual tag: X
+Mistakenly tagged word: Stirling
+-- Expected tag: NOUN
+-- Actual tag: X
+Mistakenly tagged word: Moss
+-- Expected tag: NOUN
+-- Actual tag: X
+Mistakenly tagged word: but
+-- Expected tag: ADP
+-- Actual tag: CONJ
+Mistakenly tagged word: smothered
+-- Expected tag: VERB
+-- Actual tag: ADV
+Mistakenly tagged word: self-crimination
+-- Expected tag: NOUN
+-- Actual tag: NUM
+================= SENTENCE NUMBER: 2
+[(('``', '.'), '.'), (('My', 'DET'), 'DET'), (('taste', 'NOUN'), 'NOUN'), (('is', 'VERB'), 'VERB'), (('gaudy', 'ADJ'), 'ADV'), (('.', '.'), '.')]
+Mistakenly tagged word: gaudy
+-- Expected tag: ADJ
+-- Actual tag: ADV
+================= SENTENCE NUMBER: 3
+[(("I'm", 'PRT'), 'PRT'), (('useless', 'ADJ'), 'ADJ'), (('for', 'ADP'), 'ADP'), (('anything', 'NOUN'), 'NOUN'), (('but', 'ADP'), 'CONJ'), (('racing', 'VERB'), 'ADJ'), (('cars', 'NOUN'), 'NOUN'), (('.', '.'), '.')]
+Mistakenly tagged word: but
+-- Expected tag: ADP
+-- Actual tag: CONJ
+Mistakenly tagged word: racing
+-- Expected tag: VERB
+-- Actual tag: ADJ
+================= SENTENCE NUMBER: 4
+[(("I'm", 'PRT'), 'X'), (('ruddy', 'ADV'), 'X'), (('lazy', 'ADJ'), 'X'), ((',', '.'), '.'), (('and', 'CONJ'), 'CONJ'), (("I'm", 'PRT'), 'PRT'), (('getting', 'VERB'), 'VERB'), (('on', 'PRT'), 'ADP'), (('in', 'ADP'), 'ADP'), (('years', 'NOUN'), 'NOUN'), (('.', '.'), '.')]
+Mistakenly tagged word: I'm
+-- Expected tag: PRT
+-- Actual tag: X
+Mistakenly tagged word: ruddy
+-- Expected tag: ADV
+-- Actual tag: X
+Mistakenly tagged word: lazy
+-- Expected tag: ADJ
+-- Actual tag: X
+Mistakenly tagged word: on
+-- Expected tag: PRT
+-- Actual tag: ADP
+================= SENTENCE NUMBER: 5
+[(('It', 'PRON'), 'PRON'), (('gets', 'VERB'), 'VERB'), (('so', 'ADV'), 'ADV'), (('frustrating', 'ADJ'), 'ADV'), ((',', '.'), '.'), (('but', 'CONJ'), 'CONJ'), (('then', 'ADV'), 'ADV'), (('again', 'ADV'), 'ADV'), (('I', 'PRON'), 'PRON'), (("don't", 'VERB'), 'VERB'), (('know', 'VERB'), 'VERB'), (('what', 'DET'), 'DET'), (('I', 'PRON'), 'PRON'), (('could', 'VERB'), 'VERB'), (('do', 'VERB'), 'VERB'), (('if', 'ADP'), 'ADP'), (('I', 'PRON'), 'PRON'), (('gave', 'VERB'), 'VERB'), (('up', 'PRT'), 'PRT'), (('racing', 'VERB'), 'VERB'), (("''", '.'), '.'), (('.', '.'), '.')]
+Mistakenly tagged word: frustrating
+-- Expected tag: ADJ
+-- Actual tag: ADV
+================= SENTENCE NUMBER: 6
+[(('Has', 'VERB'), 'VERB'), (('Moss', 'NOUN'), 'ADP'), (('no', 'DET'), 'DET'), (('stirling', 'ADJ'), 'X'), (('virtues', 'NOUN'), 'X'), (('?', '.'), '.'), (('?', '.'), '.')]
+Mistakenly tagged word: Moss
+-- Expected tag: NOUN
+-- Actual tag: ADP
+Mistakenly tagged word: stirling
+-- Expected tag: ADJ
+-- Actual tag: X
+Mistakenly tagged word: virtues
+-- Expected tag: NOUN
+-- Actual tag: X
+================= SENTENCE NUMBER: 7
+[(('One', 'NUM'), 'NUM'), (('of', 'ADP'), 'ADP'), (('Nikita', 'NOUN'), 'X'), (("Khrushchev's", 'NOUN'), 'X'), (('most', 'ADV'), 'X'), (('enthusiastic', 'ADJ'), 'X'), (('eulogizers', 'NOUN'), 'X'), ((',', '.'), '.'), (('the', 'DET'), 'DET'), (("U.S.S.R.'s", 'NOUN'), 'X'), (('daily', 'ADJ'), 'X'), (('Izvestia', 'NOUN'), 'X'), ((',', '.'), '.'), (('enterprisingly', 'ADV'), 'X'), (('interviewed', 'VERB'), 'X'), (('Red-prone', 'ADJ'), 'X'), (('Comedian', 'NOUN'), 'X'), (('Charlie', 'NOUN'), 'X'), (('Chaplin', 'NOUN'), 'X'), (('at', 'ADP'), 'ADP'), (('his', 'DET'), 'DET'), (('Swiss', 'ADJ'), 'ADJ'), (('villa', 'NOUN'), 'NOUN'), ((',', '.'), '.'), (('where', 'ADV'), 'ADV'), (('he', 'PRON'), 'PRON'), (('has', 'VERB'), 'VERB'), (('been', 'VERB'), 'VERB'), (('in', 'ADP'), 'ADP'), (('self-exile', 'NOUN'), 'X'), (('since', 'ADP'), 'X'), (('1952', 'NUM'), 'X'), (('.', '.'), '.')]
+Mistakenly tagged word: Nikita
+-- Expected tag: NOUN
+-- Actual tag: X
+Mistakenly tagged word: Khrushchev's
+-- Expected tag: NOUN
+-- Actual tag: X
+Mistakenly tagged word: most
+-- Expected tag: ADV
+-- Actual tag: X
+Mistakenly tagged word: enthusiastic
+-- Expected tag: ADJ
+-- Actual tag: X
+Mistakenly tagged word: eulogizers
+-- Expected tag: NOUN
+-- Actual tag: X
+Mistakenly tagged word: U.S.S.R.'s
+-- Expected tag: NOUN
+-- Actual tag: X
+Mistakenly tagged word: daily
+-- Expected tag: ADJ
+-- Actual tag: X
+Mistakenly tagged word: Izvestia
+-- Expected tag: NOUN
+-- Actual tag: X
+Mistakenly tagged word: enterprisingly
+-- Expected tag: ADV
+-- Actual tag: X
+Mistakenly tagged word: interviewed
+-- Expected tag: VERB
+-- Actual tag: X
+Mistakenly tagged word: Red-prone
+-- Expected tag: ADJ
+-- Actual tag: X
+Mistakenly tagged word: Comedian
+-- Expected tag: NOUN
+-- Actual tag: X
+Mistakenly tagged word: Charlie
+-- Expected tag: NOUN
+-- Actual tag: X
+Mistakenly tagged word: Chaplin
+-- Expected tag: NOUN
+-- Actual tag: X
+Mistakenly tagged word: self-exile
+-- Expected tag: NOUN
+-- Actual tag: X
+Mistakenly tagged word: since
+-- Expected tag: ADP
+-- Actual tag: X
+Mistakenly tagged word: 1952
+-- Expected tag: NUM
+-- Actual tag: X
+================= SENTENCE NUMBER: 8
+[(('Chaplin', 'NOUN'), 'PRON'), ((',', '.'), '.'), (('71', 'NUM'), 'NUM'), ((',', '.'), '.'), (('who', 'PRON'), 'PRON'), (('met', 'VERB'), 'VERB'), (('K.', 'NOUN'), 'NOUN'), (('when', 'ADV'), 'ADV'), (('the', 'DET'), 'DET'), (('Soviet', 'NOUN'), 'NOUN'), (('boss', 'NOUN'), 'NOUN'), (('visited', 'VERB'), 'VERB'), (('England', 'NOUN'), 'NOUN'), (('in', 'ADP'), 'ADP'), (('1956', 'NUM'), 'NUM'), ((',', '.'), '.'), (('confided', 'VERB'), 'ADV'), (('that', 'ADP'), 'ADP'), (('he', 'PRON'), 'PRON'), (('hopes', 'VERB'), 'VERB'), (('to', 'PRT'), 'PRT'), (('visit', 'VERB'), 'VERB'), (('Russia', 'NOUN'), 'NOUN'), (('some', 'DET'), 'DET'), (('time', 'NOUN'), 'NOUN'), (('this', 'DET'), 'DET'), (('summer', 'NOUN'), 'NOUN'), (('because', 'ADP'), 'ADV'), (('``', '.'), '.'), (('I', 'PRON'), 'PRON'), (('have', 'VERB'), 'VERB'), (('marveled', 'VERB'), 'ADV'), (('at', 'ADP'), 'ADP'), (('your', 'DET'), 'DET'), (('grandiose', 'ADJ'), 'ADJ'), (('experiment', 'NOUN'), 'NOUN'), (('and', 'CONJ'), 'CONJ'), (('I', 'PRON'), 'PRON'), (('believe', 'VERB'), 'VERB'), (('in', 'ADP'), 'ADP'), (('your', 'DET'), 'DET'), (('future', 'NOUN'), 'NOUN'), (("''", '.'), '.'), (('.', '.'), '.')]
+Mistakenly tagged word: Chaplin
+-- Expected tag: NOUN
+-- Actual tag: PRON
+Mistakenly tagged word: confided
+-- Expected tag: VERB
+-- Actual tag: ADV
+Mistakenly tagged word: because
+-- Expected tag: ADP
+-- Actual tag: ADV
+Mistakenly tagged word: marveled
+-- Expected tag: VERB
+-- Actual tag: ADV
+================= SENTENCE NUMBER: 9
+[(('Then', 'ADJ'), 'ADV'), (('Charlie', 'NOUN'), 'NOUN'), (('spooned', 'VERB'), 'VERB'), (('out', 'PRT'), 'PRT'), (('some', 'DET'), 'DET'), (('quick', 'ADJ'), 'ADJ'), (('impressions', 'NOUN'), 'NOUN'), (('of', 'ADP'), 'ADP'), (('the', 'DET'), 'DET'), (('Nikita', 'NOUN'), 'NOUN'), (('he', 'PRON'), 'PRON'), (('had', 'VERB'), 'VERB'), (('glimpsed', 'VERB'), 'ADV'), ((':', '.'), '.'), (('``', '.'), '.'), (('I', 'PRON'), 'PRON'), (('was', 'VERB'), 'VERB'), (('captivated', 'VERB'), 'ADV'), (('by', 'ADP'), 'ADP'), (('his', 'DET'), 'DET'), (('humor', 'NOUN'), 'NOUN'), ((',', '.'), '.'), (('frankness', 'NOUN'), 'NOUN'), (('and', 'CONJ'), 'CONJ'), (('good', 'ADJ'), 'ADJ'), (('nature', 'NOUN'), 'NOUN'), (('and', 'CONJ'), 'CONJ'), (('by', 'ADP'), 'ADP'), (('his', 'DET'), 'DET'), (('kind', 'ADJ'), 'NOUN'), ((',', '.'), '.'), (('strong', 'ADJ'), 'ADJ'), (('and', 'CONJ'), 'CONJ'), (('somewhat', 'ADV'), 'ADV'), (('sly', 'ADJ'), 'ADJ'), (('face', 'NOUN'), 'NOUN'), (("''", '.'), '.'), (('.', '.'), '.')]
+Mistakenly tagged word: Then
+-- Expected tag: ADJ
+-- Actual tag: ADV
+Mistakenly tagged word: glimpsed
+-- Expected tag: VERB
+-- Actual tag: ADV
+Mistakenly tagged word: captivated
+-- Expected tag: VERB
+-- Actual tag: ADV
+Mistakenly tagged word: kind
+-- Expected tag: ADJ
+-- Actual tag: NOUN
+================= SENTENCE NUMBER: 10
+[(('G.', 'NOUN'), 'NOUN'), (('David', 'NOUN'), 'NOUN'), (('Thompson', 'NOUN'), 'NOUN'), (('is', 'VERB'), 'VERB'), (('one', 'NUM'), 'NUM'), (('of', 'ADP'), 'ADP'), (('those', 'DET'), 'DET'), (('names', 'NOUN'), 'NOUN'), (('known', 'VERB'), 'VERB'), (('to', 'ADP'), 'ADP'), (('the', 'DET'), 'DET'), (('stewards', 'NOUN'), 'NOUN'), (('of', 'ADP'), 'ADP'), (('transatlantic', 'ADJ'), 'DET'), (('jetliners', 'NOUN'), 'NOUN'), (('and', 'CONJ'), 'CONJ'), (('to', 'ADP'), 'ADP'), (('doormen', 'NOUN'), 'NOUN'), (('in', 'ADP'), 'ADP'), (("Europe's", 'NOUN'), 'DET'), (('best', 'ADJ'), 'ADJ'), (('hotels', 'NOUN'), 'NOUN'), ((',', '.'), '.'), (('but', 'CONJ'), 'CONJ'), (('he', 'PRON'), 'PRON'), (('is', 'VERB'), 'VERB'), (('somewhat', 'ADV'), 'ADV'), (('of', 'ADP'), 'ADP'), (('an', 'DET'), 'DET'), (('enigma', 'NOUN'), 'NOUN'), (('to', 'ADP'), 'ADP'), (('most', 'ADJ'), 'ADJ'), (('people', 'NOUN'), 'NOUN'), (('in', 'ADP'), 'ADP'), (('his', 'DET'), 'DET'), (('own', 'ADJ'), 'ADJ'), (('home', 'NOUN'), 'NOUN'), (('town', 'NOUN'), 'NOUN'), (('of', 'ADP'), 'ADP'), (('Pittsburgh', 'NOUN'), 'NOUN'), (('.', '.'), '.')]
+Mistakenly tagged word: transatlantic
+-- Expected tag: ADJ
+-- Actual tag: DET
+Mistakenly tagged word: Europe's
+-- Expected tag: NOUN
+-- Actual tag: DET
+================= QUESTION 4B ANALYSIS =================
+COST OF GAUDY BEING ADV and ADJ
+-18.15227989016495
+-19.178518971478535
+COST OF VERB FOLLOWED BY ADV and ADJ
+-3.812200102417784
+-4.349747810988496
+Tagging accuracy for test set of 500 sentences: 0.8690
+
+A tagged-by-your-model version of a sentence:
+[('``', '.'), ('My', 'DET'), ('taste', 'NOUN'), ('is', 'VERB'), ('gaudy', 'ADV'), ('.', '.')]
+The tagged version of this sentence from the corpus:
+[('``', '.'), ('My', 'DET'), ('taste', 'NOUN'), ('is', 'VERB'), ('gaudy', 'ADJ'), ('.', '.')]
+
+Discussion of the difference:
+The HMM can only see 2-word histories, thus it can't see that the word 'gaudy' is actually an ADJ that describes the word 'taste'. The model tagged 'gaudy' as an ADV because 'gaudy' has a higher probability as an ADV and a VERB has a higher probability to be followed by an ADV.
+
+For Q5:
+To tag a sentence, we would need the transition and emission probabilities. For an unrecognised word, the emission probability will always be 0. However, if we make use of smoothing (e.g. by using the Lidstone estimator), it will address the problem by stealing probability mass from seen events and reallocating it to unseen events. Then, you will have a predicted tag assigned to the unrecognised word. The parsing algorithm should now be able to produce a parse for the well-formed sentence.
+
+For Q6:
+We converted the original Brown Corpus tagset to the Universal tagset because the Universal tagset has fewer tags. Having more tags means we're likely to have sparser data, i.e. the same word will have more different tags, thus that each (word, tag) pair will have less observations. This may cause lower confidence level on the probability model and accuracy on tag set will be much lower. The Universal tagset is more language agnostic (more generic) and will work better on other languages.
+    
+(base) [bergamaschi]s1709906: python s1709906.py
+states: ['DET', 'NOUN', 'ADJ', 'VERB', 'ADP', '.', 'ADV', 'CONJ', 'PRT', 'PRON', 'NUM', 'X']
+
+Tagged a trial sentence:
+  [('the', 'DET'), ('cat', 'NOUN'), ('in', 'ADP'), ('the', 'DET'), ('hat', 'NOUN'), ('came', 'VERB'), ('back', 'ADV')]
+================= SENTENCE NUMBER: 1
+[(('Tooling', 'VERB'), 'ADV'), (('through', 'ADP'), 'ADP'), (('Sydney', 'NOUN'), 'NOUN'), (('on', 'ADP'), 'ADP'), (('his', 'DET'), 'DET'), (('way', 'NOUN'), 'NOUN'), (('to', 'PRT'), 'ADP'), (('race', 'VERB'), 'NOUN'), (('in', 'ADP'), 'ADP'), (('the', 'DET'), 'DET'), (('New', 'ADJ'), 'ADJ'), (('Zealand', 'NOUN'), 'X'), (('Grand', 'X'), 'X'), (('Prix', 'X'), 'X'), ((',', '.'), '.'), (("Britain's", 'NOUN'), 'X'), (('balding', 'ADJ'), 'X'), (('Ace', 'NOUN'), 'X'), (('Driver', 'NOUN'), 'X'), (('Stirling', 'NOUN'), 'X'), (('Moss', 'NOUN'), 'X'), ((',', '.'), '.'), (('31', 'NUM'), 'NUM'), ((',', '.'), '.'), (('all', 'PRT'), 'PRT'), (('but', 'ADP'), 'CONJ'), (('smothered', 'VERB'), 'ADV'), (('himself', 'PRON'), 'PRON'), (('in', 'ADP'), 'ADP'), (('his', 'DET'), 'DET'), (('own', 'ADJ'), 'ADJ'), (('exhaust', 'NOUN'), 'NOUN'), (('of', 'ADP'), 'ADP'), (('self-crimination', 'NOUN'), 'NUM'), (('.', '.'), '.')]
+Mistakenly tagged word: Tooling
+-- Expected tag: VERB
+-- Actual tag: ADV
+Mistakenly tagged word: to
+-- Expected tag: PRT
+-- Actual tag: ADP
+Mistakenly tagged word: race
+-- Expected tag: VERB
+-- Actual tag: NOUN
+Mistakenly tagged word: Zealand
+-- Expected tag: NOUN
+-- Actual tag: X
+Mistakenly tagged word: Britain's
+-- Expected tag: NOUN
+-- Actual tag: X
+Mistakenly tagged word: balding
+-- Expected tag: ADJ
+-- Actual tag: X
+Mistakenly tagged word: Ace
+-- Expected tag: NOUN
+-- Actual tag: X
+Mistakenly tagged word: Driver
+-- Expected tag: NOUN
+-- Actual tag: X
+Mistakenly tagged word: Stirling
+-- Expected tag: NOUN
+-- Actual tag: X
+Mistakenly tagged word: Moss
+-- Expected tag: NOUN
+-- Actual tag: X
+Mistakenly tagged word: but
+-- Expected tag: ADP
+-- Actual tag: CONJ
+Mistakenly tagged word: smothered
+-- Expected tag: VERB
+-- Actual tag: ADV
+Mistakenly tagged word: self-crimination
+-- Expected tag: NOUN
+-- Actual tag: NUM
+================= SENTENCE NUMBER: 2
+[(('``', '.'), '.'), (('My', 'DET'), 'DET'), (('taste', 'NOUN'), 'NOUN'), (('is', 'VERB'), 'VERB'), (('gaudy', 'ADJ'), 'ADV'), (('.', '.'), '.')]
+Mistakenly tagged word: gaudy
+-- Expected tag: ADJ
+-- Actual tag: ADV
+================= SENTENCE NUMBER: 3
+[(("I'm", 'PRT'), 'PRT'), (('useless', 'ADJ'), 'ADJ'), (('for', 'ADP'), 'ADP'), (('anything', 'NOUN'), 'NOUN'), (('but', 'ADP'), 'CONJ'), (('racing', 'VERB'), 'ADJ'), (('cars', 'NOUN'), 'NOUN'), (('.', '.'), '.')]
+Mistakenly tagged word: but
+-- Expected tag: ADP
+-- Actual tag: CONJ
+Mistakenly tagged word: racing
+-- Expected tag: VERB
+-- Actual tag: ADJ
+================= SENTENCE NUMBER: 4
+[(("I'm", 'PRT'), 'X'), (('ruddy', 'ADV'), 'X'), (('lazy', 'ADJ'), 'X'), ((',', '.'), '.'), (('and', 'CONJ'), 'CONJ'), (("I'm", 'PRT'), 'PRT'), (('getting', 'VERB'), 'VERB'), (('on', 'PRT'), 'ADP'), (('in', 'ADP'), 'ADP'), (('years', 'NOUN'), 'NOUN'), (('.', '.'), '.')]
+Mistakenly tagged word: I'm
+-- Expected tag: PRT
+-- Actual tag: X
+Mistakenly tagged word: ruddy
+-- Expected tag: ADV
+-- Actual tag: X
+Mistakenly tagged word: lazy
+-- Expected tag: ADJ
+-- Actual tag: X
+Mistakenly tagged word: on
+-- Expected tag: PRT
+-- Actual tag: ADP
+================= SENTENCE NUMBER: 5
+[(('It', 'PRON'), 'PRON'), (('gets', 'VERB'), 'VERB'), (('so', 'ADV'), 'ADV'), (('frustrating', 'ADJ'), 'ADV'), ((',', '.'), '.'), (('but', 'CONJ'), 'CONJ'), (('then', 'ADV'), 'ADV'), (('again', 'ADV'), 'ADV'), (('I', 'PRON'), 'PRON'), (("don't", 'VERB'), 'VERB'), (('know', 'VERB'), 'VERB'), (('what', 'DET'), 'DET'), (('I', 'PRON'), 'PRON'), (('could', 'VERB'), 'VERB'), (('do', 'VERB'), 'VERB'), (('if', 'ADP'), 'ADP'), (('I', 'PRON'), 'PRON'), (('gave', 'VERB'), 'VERB'), (('up', 'PRT'), 'PRT'), (('racing', 'VERB'), 'VERB'), (("''", '.'), '.'), (('.', '.'), '.')]
+Mistakenly tagged word: frustrating
+-- Expected tag: ADJ
+-- Actual tag: ADV
+================= SENTENCE NUMBER: 6
+[(('Has', 'VERB'), 'VERB'), (('Moss', 'NOUN'), 'ADP'), (('no', 'DET'), 'DET'), (('stirling', 'ADJ'), 'X'), (('virtues', 'NOUN'), 'X'), (('?', '.'), '.'), (('?', '.'), '.')]
+Mistakenly tagged word: Moss
+-- Expected tag: NOUN
+-- Actual tag: ADP
+Mistakenly tagged word: stirling
+-- Expected tag: ADJ
+-- Actual tag: X
+Mistakenly tagged word: virtues
+-- Expected tag: NOUN
+-- Actual tag: X
+================= SENTENCE NUMBER: 7
+[(('One', 'NUM'), 'NUM'), (('of', 'ADP'), 'ADP'), (('Nikita', 'NOUN'), 'X'), (("Khrushchev's", 'NOUN'), 'X'), (('most', 'ADV'), 'X'), (('enthusiastic', 'ADJ'), 'X'), (('eulogizers', 'NOUN'), 'X'), ((',', '.'), '.'), (('the', 'DET'), 'DET'), (("U.S.S.R.'s", 'NOUN'), 'X'), (('daily', 'ADJ'), 'X'), (('Izvestia', 'NOUN'), 'X'), ((',', '.'), '.'), (('enterprisingly', 'ADV'), 'X'), (('interviewed', 'VERB'), 'X'), (('Red-prone', 'ADJ'), 'X'), (('Comedian', 'NOUN'), 'X'), (('Charlie', 'NOUN'), 'X'), (('Chaplin', 'NOUN'), 'X'), (('at', 'ADP'), 'ADP'), (('his', 'DET'), 'DET'), (('Swiss', 'ADJ'), 'ADJ'), (('villa', 'NOUN'), 'NOUN'), ((',', '.'), '.'), (('where', 'ADV'), 'ADV'), (('he', 'PRON'), 'PRON'), (('has', 'VERB'), 'VERB'), (('been', 'VERB'), 'VERB'), (('in', 'ADP'), 'ADP'), (('self-exile', 'NOUN'), 'X'), (('since', 'ADP'), 'X'), (('1952', 'NUM'), 'X'), (('.', '.'), '.')]
+Mistakenly tagged word: Nikita
+-- Expected tag: NOUN
+-- Actual tag: X
+Mistakenly tagged word: Khrushchev's
+-- Expected tag: NOUN
+-- Actual tag: X
+Mistakenly tagged word: most
+-- Expected tag: ADV
+-- Actual tag: X
+Mistakenly tagged word: enthusiastic
+-- Expected tag: ADJ
+-- Actual tag: X
+Mistakenly tagged word: eulogizers
+-- Expected tag: NOUN
+-- Actual tag: X
+Mistakenly tagged word: U.S.S.R.'s
+-- Expected tag: NOUN
+-- Actual tag: X
+Mistakenly tagged word: daily
+-- Expected tag: ADJ
+-- Actual tag: X
+Mistakenly tagged word: Izvestia
+-- Expected tag: NOUN
+-- Actual tag: X
+Mistakenly tagged word: enterprisingly
+-- Expected tag: ADV
+-- Actual tag: X
+Mistakenly tagged word: interviewed
+-- Expected tag: VERB
+-- Actual tag: X
+Mistakenly tagged word: Red-prone
+-- Expected tag: ADJ
+-- Actual tag: X
+Mistakenly tagged word: Comedian
+-- Expected tag: NOUN
+-- Actual tag: X
+Mistakenly tagged word: Charlie
+-- Expected tag: NOUN
+-- Actual tag: X
+Mistakenly tagged word: Chaplin
+-- Expected tag: NOUN
+-- Actual tag: X
+Mistakenly tagged word: self-exile
+-- Expected tag: NOUN
+-- Actual tag: X
+Mistakenly tagged word: since
+-- Expected tag: ADP
+-- Actual tag: X
+Mistakenly tagged word: 1952
+-- Expected tag: NUM
+-- Actual tag: X
+================= SENTENCE NUMBER: 8
+[(('Chaplin', 'NOUN'), 'PRON'), ((',', '.'), '.'), (('71', 'NUM'), 'NUM'), ((',', '.'), '.'), (('who', 'PRON'), 'PRON'), (('met', 'VERB'), 'VERB'), (('K.', 'NOUN'), 'NOUN'), (('when', 'ADV'), 'ADV'), (('the', 'DET'), 'DET'), (('Soviet', 'NOUN'), 'NOUN'), (('boss', 'NOUN'), 'NOUN'), (('visited', 'VERB'), 'VERB'), (('England', 'NOUN'), 'NOUN'), (('in', 'ADP'), 'ADP'), (('1956', 'NUM'), 'NUM'), ((',', '.'), '.'), (('confided', 'VERB'), 'ADV'), (('that', 'ADP'), 'ADP'), (('he', 'PRON'), 'PRON'), (('hopes', 'VERB'), 'VERB'), (('to', 'PRT'), 'PRT'), (('visit', 'VERB'), 'VERB'), (('Russia', 'NOUN'), 'NOUN'), (('some', 'DET'), 'DET'), (('time', 'NOUN'), 'NOUN'), (('this', 'DET'), 'DET'), (('summer', 'NOUN'), 'NOUN'), (('because', 'ADP'), 'ADV'), (('``', '.'), '.'), (('I', 'PRON'), 'PRON'), (('have', 'VERB'), 'VERB'), (('marveled', 'VERB'), 'ADV'), (('at', 'ADP'), 'ADP'), (('your', 'DET'), 'DET'), (('grandiose', 'ADJ'), 'ADJ'), (('experiment', 'NOUN'), 'NOUN'), (('and', 'CONJ'), 'CONJ'), (('I', 'PRON'), 'PRON'), (('believe', 'VERB'), 'VERB'), (('in', 'ADP'), 'ADP'), (('your', 'DET'), 'DET'), (('future', 'NOUN'), 'NOUN'), (("''", '.'), '.'), (('.', '.'), '.')]
+Mistakenly tagged word: Chaplin
+-- Expected tag: NOUN
+-- Actual tag: PRON
+Mistakenly tagged word: confided
+-- Expected tag: VERB
+-- Actual tag: ADV
+Mistakenly tagged word: because
+-- Expected tag: ADP
+-- Actual tag: ADV
+Mistakenly tagged word: marveled
+-- Expected tag: VERB
+-- Actual tag: ADV
+================= SENTENCE NUMBER: 9
+[(('Then', 'ADJ'), 'ADV'), (('Charlie', 'NOUN'), 'NOUN'), (('spooned', 'VERB'), 'VERB'), (('out', 'PRT'), 'PRT'), (('some', 'DET'), 'DET'), (('quick', 'ADJ'), 'ADJ'), (('impressions', 'NOUN'), 'NOUN'), (('of', 'ADP'), 'ADP'), (('the', 'DET'), 'DET'), (('Nikita', 'NOUN'), 'NOUN'), (('he', 'PRON'), 'PRON'), (('had', 'VERB'), 'VERB'), (('glimpsed', 'VERB'), 'ADV'), ((':', '.'), '.'), (('``', '.'), '.'), (('I', 'PRON'), 'PRON'), (('was', 'VERB'), 'VERB'), (('captivated', 'VERB'), 'ADV'), (('by', 'ADP'), 'ADP'), (('his', 'DET'), 'DET'), (('humor', 'NOUN'), 'NOUN'), ((',', '.'), '.'), (('frankness', 'NOUN'), 'NOUN'), (('and', 'CONJ'), 'CONJ'), (('good', 'ADJ'), 'ADJ'), (('nature', 'NOUN'), 'NOUN'), (('and', 'CONJ'), 'CONJ'), (('by', 'ADP'), 'ADP'), (('his', 'DET'), 'DET'), (('kind', 'ADJ'), 'NOUN'), ((',', '.'), '.'), (('strong', 'ADJ'), 'ADJ'), (('and', 'CONJ'), 'CONJ'), (('somewhat', 'ADV'), 'ADV'), (('sly', 'ADJ'), 'ADJ'), (('face', 'NOUN'), 'NOUN'), (("''", '.'), '.'), (('.', '.'), '.')]
+Mistakenly tagged word: Then
+-- Expected tag: ADJ
+-- Actual tag: ADV
+Mistakenly tagged word: glimpsed
+-- Expected tag: VERB
+-- Actual tag: ADV
+Mistakenly tagged word: captivated
+-- Expected tag: VERB
+-- Actual tag: ADV
+Mistakenly tagged word: kind
+-- Expected tag: ADJ
+-- Actual tag: NOUN
+================= SENTENCE NUMBER: 10
+[(('G.', 'NOUN'), 'NOUN'), (('David', 'NOUN'), 'NOUN'), (('Thompson', 'NOUN'), 'NOUN'), (('is', 'VERB'), 'VERB'), (('one', 'NUM'), 'NUM'), (('of', 'ADP'), 'ADP'), (('those', 'DET'), 'DET'), (('names', 'NOUN'), 'NOUN'), (('known', 'VERB'), 'VERB'), (('to', 'ADP'), 'ADP'), (('the', 'DET'), 'DET'), (('stewards', 'NOUN'), 'NOUN'), (('of', 'ADP'), 'ADP'), (('transatlantic', 'ADJ'), 'DET'), (('jetliners', 'NOUN'), 'NOUN'), (('and', 'CONJ'), 'CONJ'), (('to', 'ADP'), 'ADP'), (('doormen', 'NOUN'), 'NOUN'), (('in', 'ADP'), 'ADP'), (("Europe's", 'NOUN'), 'DET'), (('best', 'ADJ'), 'ADJ'), (('hotels', 'NOUN'), 'NOUN'), ((',', '.'), '.'), (('but', 'CONJ'), 'CONJ'), (('he', 'PRON'), 'PRON'), (('is', 'VERB'), 'VERB'), (('somewhat', 'ADV'), 'ADV'), (('of', 'ADP'), 'ADP'), (('an', 'DET'), 'DET'), (('enigma', 'NOUN'), 'NOUN'), (('to', 'ADP'), 'ADP'), (('most', 'ADJ'), 'ADJ'), (('people', 'NOUN'), 'NOUN'), (('in', 'ADP'), 'ADP'), (('his', 'DET'), 'DET'), (('own', 'ADJ'), 'ADJ'), (('home', 'NOUN'), 'NOUN'), (('town', 'NOUN'), 'NOUN'), (('of', 'ADP'), 'ADP'), (('Pittsburgh', 'NOUN'), 'NOUN'), (('.', '.'), '.')]
+Mistakenly tagged word: transatlantic
+-- Expected tag: ADJ
+-- Actual tag: DET
+Mistakenly tagged word: Europe's
+-- Expected tag: NOUN
+-- Actual tag: DET
+================= QUESTION 4B ANALYSIS =================
+COST OF GAUDY BEING ADV and ADJ
+-18.15227989016495
+-19.178518971478535
+COST OF VERB FOLLOWED BY ADV and ADJ
+-3.812200102417784
+-4.349747810988496
+================= ACCURACY =================
+Tagging accuracy for test set of 500 sentences: 0.8690
+
+A tagged-by-your-model version of a sentence:
+[('``', '.'), ('My', 'DET'), ('taste', 'NOUN'), ('is', 'VERB'), ('gaudy', 'ADV'), ('.', '.')]
+The tagged version of this sentence from the corpus:
+[('``', '.'), ('My', 'DET'), ('taste', 'NOUN'), ('is', 'VERB'), ('gaudy', 'ADJ'), ('.', '.')]
+
+Discussion of the difference:
+The HMM can only see 2-word histories, thus it can't see that the word 'gaudy' is actually an ADJ that describes the word 'taste'. The model tagged 'gaudy' as an ADV because 'gaudy' has a higher probability as an ADV and a VERB has a higher probability to be followed by an ADV.
+
+For Q5:
+To tag a sentence, we would need the transition and emission probabilities. For an unrecognised word, the emission probability will always be 0. However, if we make use of smoothing (e.g. by using the Lidstone estimator), it will address the problem by stealing probability mass from seen events and reallocating it to unseen events. Then, you will have a predicted tag assigned to the unrecognised word. The parsing algorithm should now be able to produce a parse for the well-formed sentence.
+
+For Q6:
+We converted the original Brown Corpus tagset to the Universal tagset because the Universal tagset has fewer tags. Having more tags means we're likely to have sparser data, i.e. the same word will have more different tags, thus that each (word, tag) pair will have less observations. This may cause lower confidence level on the probability model and accuracy on tag set will be much lower. The Universal tagset is more language agnostic (more generic) and will work better on other languages.
+
