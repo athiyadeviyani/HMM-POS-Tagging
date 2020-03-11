@@ -410,8 +410,7 @@ def answer_question6():
     """
 
     return inspect.cleandoc("""\
-    We converted the original Brown Corpus tagset to the Universal tagset because the Universal tagset has fewer tags. Having more tags means we're likely to have sparser data, i.e. the same word will have more different tags, thus that each (word, tag) pair will have less observations. This may cause lower confidence level on the probability model and accuracy on tag set will be much lower. The Universal tagset is more language agnostic (more generic) and will work better on other languages.
-    """)[0:500]
+    We converted the original Brown Corpus tagset to the Universal tagset because the Universal tagset has fewer tags. Having more tags means we're likely to have sparser data, i.e. the same word will have more different tags, thus that each (word, tag) pair will have less observations. This may cause lower confidence level on the probability model and accuracy on tag set will be much lower. The Universal tagset is more language agnostic (more generic) and will work better on other languages.""")[0:500]
 
 # Useful for testing
 def isclose(a, b, rel_tol=1e-09, abs_tol=0.0):
@@ -537,7 +536,7 @@ def answers():
     print(model.tlprob('VERB','ADJ')) # -4.349747810988496
 
     print("================= ACCURACY =================")
-    
+
     accuracy = correct / (correct + incorrect)
     print('Tagging accuracy for test set of %s sentences: %.4f'%(test_size,accuracy))
 
