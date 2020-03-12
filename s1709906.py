@@ -393,8 +393,6 @@ def answer_question5():
     :rtype: str
     :return: your answer [max 500 chars]
     """
-    #raise NotImplementedError('answer_question5')
-    
 
     return inspect.cleandoc("""\
     To tag a sentence, we would need the transition and emission probabilities. For an unrecognised word, the emission probability will always be 0. However, if we make use of smoothing (e.g. by using the Lidstone estimator), it will address the problem by stealing probability mass from seen events and reallocating it to unseen events. Then, you will have a predicted tag assigned to the unrecognised word. The parsing algorithm should now be able to produce a parse for the well-formed sentence.""")[0:500]
