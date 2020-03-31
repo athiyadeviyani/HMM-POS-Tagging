@@ -1,3 +1,9 @@
 # Hidden Markov Models: Part-of-speech Tagging
-Marks obtained: 92/100
-<br> Interim checker: https://homepages.inf.ed.ac.uk/cgi/ht/fnlp/interim2.py
+<b>Mark:</b> 92/100
+<br>
+<b>Interim checker:</b> https://homepages.inf.ed.ac.uk/cgi/ht/fnlp/interim2.py
+## Sections
+A. Training a Hidden Markov Model 
+<br>B. Implementing the Viterbi Algorithm
+<br>C. Short-answer questions
+
