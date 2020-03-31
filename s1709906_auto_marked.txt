@@ -1,0 +1,155 @@
+FNLP ASSIGNMENT 2
+Student: s1709906
+
+***Question 1 (10 marks) ***
+States: ['.', 'ADJ', 'ADP', 'ADV', '...']
+|* Passed automarker test: 2 marks (out of 2)
+Number of VERB types: 2649
+|* Passed automarker test: 2 marks (out of 2)
+Emission cost of 'attack' as a VERB: 12.060
+|* Passed automarker test: 6 marks (out of 6)
+
+**---
+|*
+|* Total for Question 1: 10 marks
+**---
+
+***Question 2 (10 marks) ***
+Number of transitions from VERB: 13
+|* Passed automarker test: 5 marks (out of 5)
+Transition cost from VERB to DET: 2.463
+|* Passed automarker test: 5 marks (out of 5)
+|*
+|* Total for Question 2: 10 marks
+**---
+
+***Question 3 (20 marks) ***
+
+** Part 3.1: Viterbi (10 marks) ***
+Number of state slots: True
+|* Passed automarker test: 5 marks (out of 5)
+Number of time slots: True
+|* Passed automarker test: 5 marks (out of 5)
+
+** Part 3.2: Backpointers (5 marks) ***
+Number of state slots: True
+|* Passed automarker test: 2 marks (out of 2)
+Number of time slots: True
+|* Passed automarker test: 3 marks (out of 3)
+
+** Part 3.3: Initialisation (5 marks) ***
+Cost of 'attack' as VERB, first word: 16.793
+|* Passed automarker test: 4 marks (out of 4)
+Backpointer from VERB, second word: NOUN
+|* Passed automarker test: 1 marks (out of 1)
+|*
+|* Total for Question 3: 20 marks
+**---
+
+***Question 4a (35 marks) ***
+Accuracy: 0.86898
+|* Passed automarker test: 10 marks (out of 10)
+Midpoint VERB cost: 56.631
+|* Passed automarker test: 5 marks (out of 5)
+Final step best cost: 308.712
+|* Passed automarker test: 5 marks (out of 5)
+Sample tags: ['DET', 'NOUN', 'ADP', 'DET', '...']
+|* Passed automarker test: 8 marks (out of 8)
+Handling </s>: Read the code
+|* Failed automarker value test: Read the code != This one can't be automarked.  Look for code near the _end_ of the HMM.tag
+method which looks something like this:
+        # add termination step (for transition to </s> , end of sentence)
+        min_cost = 1e10
+        bp = 0
+        T=len(observations) - 1
+        for i in range(len(self.states)):
+            state = self.states[i]
+            pp = self.viterbi[i][T] - self.transition_PD[state].logprob('</s>')
+            if pp < min_cost:
+                min_cost = pp
+                bp = state
+
+        viterbi_final = min_cost
+        backpointer_final = bp
+
+and mark accordingly.  Anything which loops over states and looks at the last column of the viterbi matrix gets 5 out of 7. (7).
+|* Marker comment: 
+|* 
+|* 
+|* Hand-examined code for errors and awarded: 7 marks (out of 7)
+|*
+|* Total for Question 4a: 35 marks
+**---
+
+***Question 4b (5 marks) ***
+
+** Part 4b.1: Example taggings (1 marks) ***
+|* Passed automarker test: 0.5 marks (out of 0.5)
+|* Passed automarker test: 0.5 marks (out of 0.5)
+        'Bad' tags        'Good' tags
+       ('``', '.')        ('``', '.')
+     ('My', 'DET')      ('My', 'DET')
+ ('taste', 'NOUN')  ('taste', 'NOUN')
+    ('is', 'VERB')     ('is', 'VERB')
+  ('gaudy', 'ADV')*  ('gaudy', 'ADJ')
+        ('.', '.')         ('.', '.')
+
+
+** Part 4b.2: Free text answer (4 marks) ***
+  The HMM can only see 2-word histories, thus it can't see that the
+  word 'gaudy' is actually an ADJ that describes the word 'taste'. The
+  model tagged 'gaudy' as an ADV because 'gaudy' has a higher
+  probability as an ADV and a VERB has a higher probability to be
+  followed by an ADV.
+
+**---278 chars, 53 words
+|* Marker comment for part 4b.2: This is correct.
+|* 
+|* 
+|* Hand-examined code for errors and awarded: 4 marks (out of 4)
+|*
+|* Total for Question 4b: 5 marks
+**---
+
+***Question 5 (10 marks) ***
+  To tag a sentence, we would need the transition and emission
+  probabilities. For an unrecognised word, the emission probability
+  will always be 0. However, if we make use of smoothing (e.g. by
+  using the Lidstone estimator), it will address the problem by
+  stealing probability mass from seen events and reallocating it to
+  unseen events. Then, you will have a predicted tag assigned to the
+  unrecognised word. The parsing algorithm should now be able to
+  produce a parse for the well-formed sentence.
+
+**---494 chars, 81 words
+|* Marker comment: The aim of this question is to understand how a tagger could be used to handle unknown tokens and let the parser produce reliable parses, without being able to change the tagger's implementation.
+|* If you had control over the tagger, smoothing could help, but is not adressing the question: the tagger is pre-trained and you do not necessarily have access to its implementation.
+|* You should also discuss how this approach would fare compared to the original parser.
+|* Hand-examined free text answer and awarded: 2 marks (out of 10)
+|*
+|* Total for Question 5: 2 marks
+**---
+
+***Question 6 (10 marks) ***
+  We converted the original Brown Corpus tagset to the Universal
+  tagset because the Universal tagset has fewer tags. Having more tags
+  means we're likely to have sparser data, i.e. the same word will
+  have more different tags, thus that each (word, tag) pair will have
+  less observations. This may cause lower confidence level on the
+  probability model and accuracy on tag set will be much lower. The
+  Universal tagset is more language agnostic (more generic) and will
+  work better on other languages.
+
+**---493 chars, 82 words
+|* Marker comment: 
+|* 
+|* 
+|* Hand-examined answer and awarded: 10 marks (out of 10)
+|*
+|* Total for Question 6: 10 marks
+**---
+
+|* Automarked total: 69.0 marks
+|* Hand-marked total: 23 marks (out of 31.0)
+|*
+|* TOTAL FOR ASSIGNMENT: 92 marks
